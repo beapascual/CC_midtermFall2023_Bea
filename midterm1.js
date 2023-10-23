@@ -28,6 +28,7 @@ function draw() {
     // rect(0, 600, 100, 200);
     for (i = 0; i < 8; i++) {
       city[i].display();
+
       //city[i].windows();
     }
   } //night sky
