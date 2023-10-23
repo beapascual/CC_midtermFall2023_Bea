@@ -10,8 +10,9 @@ class building{
     fill(0);
     rect(this.x,this.y,this.w,this.h);
   }
+}
   
-  windows(col, row){
+  /*windows(col, row){
     fill(255,255,0)
     for (i = 0; i < col; i++){
       for(j = 0; j < row; j++){
@@ -19,7 +20,7 @@ class building{
       }
     }
   }
-}
+}*/
 
 
 
