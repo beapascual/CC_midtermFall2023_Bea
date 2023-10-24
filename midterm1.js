@@ -51,42 +51,45 @@ function draw() {
     strokeWeight(5);
     stroke(255);
 
-    circleSize += 10;
+    circleSize += 5;
+    
+    
+    if (mouseIsPressed === true) {
 
-    stroke(0, 64, 128);
-    circle(circleX, circleY, circleSize);
-    circle(circleX, circleY, circleSize * 0.75);
-    circle(circleX, circleY, circleSize * 0.5);
-  } // ripple scene
-  
-  function mousePressed() {
-    circleX = mouseX;
-  circleY = mouseY;
-  circleSize = 0;
-  }
-
-  if (option === 2) {
-    setGradient(c1, c2);
-  } // sunset scene
-
-  if (option === 3) {
-    background(2, 16, 89);
-    for (i = 0; i < 8; i++) {
-      city[i].display();
-      //city[i].windows();
-      //city[i].windows();
+      circleX = mouseX;
+      circleY = mouseY;
+      circleSize = 0;
     }
-  } //night sky
+      
+      
+    circle(circleX, circleY, circleSize);
+      circle(circleX, circleY, circleSize * 0.75);
+      circle(circleX, circleY, circleSize * 0.5);
+    }
 
-  if (option === 4) {
-    background(178, 190, 136, 150);
-  } // breathing
-  // ripple scene
-}
+    if (option === 2) {
+      setGradient(c1, c2);
+    } // sunset scene
 
-function keyPressed() {
-  option++;
-  if (option > 4) {
-    option = 1;
+    if (option === 3) {
+      background(2, 16, 89);
+      for (i = 0; i < 8; i++) {
+        city[i].display();
+        //city[i].windows();
+        //city[i].windows();
+      }
+    } //night sky
+
+    if (option === 4) {
+      background(178, 190, 136, 150);
+    } // breathing
+    // ripple scene
   }
-}
+
+  function keyPressed() {
+    option++;
+    if (option > 4) {
+      option = 1;
+    }
+  }
+
