@@ -1,15 +1,39 @@
 let option = 1;
 let tall = [];
 let city = [];
+let c1, c2, c3, c4;
 
 function setup() {
   createCanvas(800, 800);
   background(255);
+  
+    c1= color(157, 94, 156);
+c2 = color(251, 233, 113);
+  c3 = color(29, 53, 87);
+ c4 = color(168, 218, 220);
+
   for (i = 0; i < 8; i++) {
     tall[i] = random(300, 550);
   }
   for (i = 0; i < 8; i++) {
-    city[i] = new building(i * 100, height - tall[i], 100, tall[i]);
+    city[i] = new building(i * 100, height - tall[i], 100, tall[i], c3);
+  }
+  
+  // for (i = 0; i < 3; i ++){
+  //   for (j = 0; j < 8; i++){
+  //     city[i][j] = new building(i * 100, height - tall[i], 100, tall[i], c3);
+  //   }
+  // }
+}
+
+function setGradient(c1, c2) {
+  // noprotect
+  noFill();
+  for (var y = 0; y < height; y++) {
+    var inter = map(y, 0, height, 0, 1);
+    var c = lerpColor(c1, c2, inter);
+    stroke(c);
+    line(0, y, width, y);
   }
 }
 
@@ -19,16 +43,14 @@ function draw() {
   } // ripple scene
 
   if (option === 2) {
-    background(255, 206, 200, 180);
-  } // waterfall scene
+    setGradient(c1,c2);
+  } // sunset scene
 
   if (option === 3) {
     background(2, 16, 89);
-    fill(0);
-    // rect(0, 600, 100, 200);
     for (i = 0; i < 8; i++) {
       city[i].display();
-
+      //city[i].windows();
       //city[i].windows();
     }
   } //night sky
@@ -36,7 +58,8 @@ function draw() {
   if (option === 4) {
     background(178, 190, 136, 150);
   } // breathing
-} // ripple scene
+  // ripple scene
+}
 
 function keyPressed() {
   option++;
@@ -44,5 +67,4 @@ function keyPressed() {
     option = 1;
   }
 }
-
 
