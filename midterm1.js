@@ -88,12 +88,12 @@ function draw() {
       fill(255, 255, 0);
       ellipse(x, y, 3, 3);
     }
-    for (i = 0; i < 9; i++) {
-      stroke(1);
-      city[i].display();
-      city2[i].display();
-      city3[i].display();
-    }
+    // for (i = 0; i < 9; i++) {
+    //   stroke(1);
+    //   city[i].display();
+    //   city2[i].display();
+    //   city3[i].display();
+    // }
     
   }
   //night city
