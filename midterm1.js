@@ -18,7 +18,7 @@ function setup() {
   background(255);
 
   c1 = color(0, 0, 153);
-  c2 = color(204, 51, 0); 
+  c2 = color(204, 51, 0);
   c3 = color(32, 31, 70, 100);
   c4 = color(54, 40, 78);
   c5 = color(55, 55, 149);
@@ -46,6 +46,7 @@ function setup() {
 }
 
 function setGradient(c1, c2) {
+  // noprotect
   noFill();
   for (var y = 0; y < height; y++) {
     var inter = map(y, 0, height, 0, 1);
@@ -53,11 +54,12 @@ function setGradient(c1, c2) {
     stroke(c);
     line(0, y, width, y);
   }
-} // night sky gradient of city
+} // gradient background of sunset
 
 function draw() {
   if (option === 1) {
     background(0);
+    
 
     if (mouseIsPressed === true) {
       circleX = mouseX;
@@ -92,12 +94,15 @@ function draw() {
       city2[i].display();
       city3[i].display();
     }
+    
   }
-} //night city
+  //night city
 
-if (option === 3) {
-  background(178, 190, 136, 150);
-} // breathing
+  if (option === 3) {
+    frameRate(60);
+    background(178, 190, 136, 150);
+  } // breathing
+}
 
 function keyPressed() {
   option++;
