@@ -21,25 +21,7 @@ class building{
   }
 }
 
-  /*windows(){
-    fill(255,255,0)
-    for(i=0; i< this.w; i = this.x + 10){
-      for(j=0; j<this.h; j = this.y + 10){
-        rect(this.x,this.y,20,20);
-      }
-    }
-  }
-}*/
-  
-  /*windows(col, row){
-    fill(255,255,0)
-    for (i = 0; i < col; i++){
-      for(j = 0; j < row; j++){
-        rect(this.x + (j*10), this.y + (i*10), 20, 20)
-      }
-    }
-  }
-}*/
+
 
 
 

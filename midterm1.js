@@ -1,34 +1,42 @@
-let option = 1;
+let option = 1; // to change scenes
+
 let tall = [];
 let tall2 = [];
 let tall3 = [];
 let city = [];
 let city2 = [];
-let city3 = [];
-let c1, c2, c3, c4, c5;
+let city3 = []; // for city
+
+
+let c1, c2, c3, c4, c5; // colors
+
+
 let circleX;
 let circleY;
-let circleSize;
-//let circleStatus = false;
+let circleSize; // for ripples
+
 
 function setup() {
   createCanvas(800, 800);
   background(255);
 
   c1 = color(157, 94, 156);
-  c2 = color(251, 233, 113);
+  c2 = color(251, 233, 113); // for gradient
+
   c3 = color(32, 31, 70);
   c4 = color(45, 43, 111);
-  c5 = color(55, 55, 149);
+  c5 = color(55, 55, 149); // for city
+
   circleX = width / 2;
   circleY = height / 2;
-  circleSize = 0;
+  circleSize = 0; // for ripples
+
 
     for (i = 0; i < 9; i++) {
     tall[i] = random(575, 650);
     tall2[i] = random (475, 550);
     tall3[i]= random (300,450);
-  }
+  } // heights of buildings (city)
   for (i = 0; i < 9; i++) {
     city3[i] = new building(
       i * 100 - 100,
@@ -45,11 +53,10 @@ function setup() {
       c4
     );
     city[i] = new building(i * 100 - 30, height - tall[i], 100, tall[i], c3);
-  }
+  } // placements of buildings (city)
 }
 
 function setGradient(c1, c2) {
-  // noprotect
   noFill();
   for (var y = 0; y < height; y++) {
     var inter = map(y, 0, height, 0, 1);
@@ -57,7 +64,7 @@ function setGradient(c1, c2) {
     stroke(c);
     line(0, y, width, y);
   }
-}
+} // gradient background of sunset
 
 function draw() {
   if (option === 1) {
@@ -77,7 +84,7 @@ function draw() {
     circle(circleX, circleY, circleSize);
     circle(circleX, circleY, circleSize * 0.75);
     circle(circleX, circleY, circleSize * 0.5);
-  }
+  } // ripples
 
   if (option === 2) {
     setGradient(c1, c2);
@@ -92,12 +99,11 @@ function draw() {
     city2[i].display();
     city3[i].display();
     }
-  } //night sky
+  } //night city
 
   if (option === 4) {
     background(178, 190, 136, 150);
   } // breathing
-  // ripple scene
 }
 
 function keyPressed() {
@@ -105,4 +111,4 @@ function keyPressed() {
   if (option > 4) {
     option = 1;
   }
-}
+} // to change scenes
