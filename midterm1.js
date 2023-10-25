@@ -23,21 +23,21 @@ function setup() {
   circleSize = 0;
 
   for (i = 0; i < 8; i++) {
-    tall[i] = random(300, 400);
+    tall[i] = random(300, 550);
   }
   for (i = 0; i < 8; i++) {
     city3[i] = new building(
       i * 100,
-      height - (tall[i] - 200),
+      height - (tall[i] - 150),
       100,
-      tall[i] - 200,
+      tall[i] - 150,
       c5
     );
     city2[i] = new building(
       i * 100,
-      height - (tall[i] - 100),
+      height - (tall[i] - 75),
       100,
-      tall[i] - 100,
+      tall[i] - 75,
       c4
     );
     city[i] = new building(i * 100, height - tall[i], 100, tall[i], c3);
