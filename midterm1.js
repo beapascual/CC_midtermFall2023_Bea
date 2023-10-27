@@ -101,7 +101,81 @@ function draw() {
   if (option === 3) {
     frameRate(60);
     background(178, 190, 136, 150);
+  
+  
+    push();
+   translate(width/2,height/2);
+   if (frameCount <= 800){
+     polygon(0, 0, 120, frameCount/100);
+   }
+   else{
+     polygon(0, 0, 120, 8);
+   }
+   pop();
+   
+    push();
+   translate(width/2,height/2);
+   if (frameCount <= 700){
+     polygon(0, 0, 110, frameCount/100);
+   }
+   else{
+     polygon(0, 0, 110,7 );
+   }
+   pop();
+   
+    push();
+   translate(width/2,height/2);
+   if (frameCount <= 600){
+     polygon(0, 0, 100, frameCount/100);
+   }
+   else{
+     polygon(0, 0, 100, 6);
+   }
+   pop();
+   
+    push();
+   translate(width/2,height/2);
+   if (frameCount <= 500){
+     polygon(0, 0, 90, frameCount/100);
+   }
+   else{
+     polygon(0, 0, 90, 5);
+   }
+   pop();
+   
+    push();
+   translate(width/2,height/2);
+   if (frameCount <= 400){
+     polygon(0, 0, 80, frameCount/100);
+   }
+   else{
+     polygon(0, 0, 80, 4);
+   }
+   pop();
+   
+   push();
+   translate(width/2,height/2);
+   if (frameCount <= 300){
+     polygon(0, 0, 70, frameCount/100);
+   }
+   else{
+     polygon(0, 0, 70, 3);
+   }
+   pop();
+   
   } // breathing
+}
+
+function polygon(x, y, radius, npoints) {
+  fill(255);
+  let angle = TWO_PI / npoints;
+  beginShape();
+  for (let a = 0; a < TWO_PI; a += angle) {
+    let sx = x + cos(a) * radius;
+    let sy = y + sin(a) * radius;
+    vertex(sx, sy);
+  }
+  endShape(CLOSE);
 }
 
 function keyPressed() {
