@@ -13,6 +13,8 @@ let circleX;
 let circleY;
 let circleSize; // for ripples
 
+let angle = 0
+
 function setup() {
   createCanvas(800, 800);
   background(255);
@@ -101,81 +103,38 @@ function draw() {
   if (option === 3) {
     frameRate(60);
     background(178, 190, 136, 150);
+    translate(width / 2, height / 2);
+    noStroke();
+    background(178, 190, 136, 150);
   
-  
-    push();
-   translate(width/2,height/2);
-   if (frameCount <= 800){
-     polygon(0, 0, 120, frameCount/100);
-   }
-   else{
-     polygon(0, 0, 120, 8);
-   }
-   pop();
-   
-    push();
-   translate(width/2,height/2);
-   if (frameCount <= 700){
-     polygon(0, 0, 110, frameCount/100);
-   }
-   else{
-     polygon(0, 0, 110,7 );
-   }
-   pop();
-   
-    push();
-   translate(width/2,height/2);
-   if (frameCount <= 600){
-     polygon(0, 0, 100, frameCount/100);
-   }
-   else{
-     polygon(0, 0, 100, 6);
-   }
-   pop();
-   
-    push();
-   translate(width/2,height/2);
-   if (frameCount <= 500){
-     polygon(0, 0, 90, frameCount/100);
-   }
-   else{
-     polygon(0, 0, 90, 5);
-   }
-   pop();
-   
-    push();
-   translate(width/2,height/2);
-   if (frameCount <= 400){
-     polygon(0, 0, 80, frameCount/100);
-   }
-   else{
-     polygon(0, 0, 80, 4);
-   }
-   pop();
-   
-   push();
-   translate(width/2,height/2);
-   if (frameCount <= 300){
-     polygon(0, 0, 70, frameCount/100);
-   }
-   else{
-     polygon(0, 0, 70, 3);
-   }
-   pop();
-   
-  } // breathing
-}
+    const r = map(sin(angle), -1, 1, 0, 100);
+    const baseRadius = 300
+    
+    
 
-function polygon(x, y, radius, npoints) {
-  fill(255);
-  let angle = TWO_PI / npoints;
-  beginShape();
-  for (let a = 0; a < TWO_PI; a += angle) {
-    let sx = x + cos(a) * radius;
-    let sy = y + sin(a) * radius;
-    vertex(sx, sy);
-  }
-  endShape(CLOSE);
+
+const from = color(210,245,158);
+const to = color(255);
+colorMode(RGB);
+const interA = lerpColor(from, to, 0.33);
+const interB = lerpColor(from, to, 0.66);
+fill(from);
+ellipse(0,0,400);
+fill(interA);
+ellipse(0,0,300);
+fill(interB);
+ellipse(0,0,200);
+fill(to);
+ellipse(0,0,100);
+  
+    // fill(210,245,158,);
+    // circle(0, 0, 100+baseRadius);
+  
+    fill(26, 113, 63, 150);
+    circle(0, 0, map(r, 0, 100, 0, r+baseRadius));
+  
+    angle += 0.01;
+}
 }
 
 function keyPressed() {
