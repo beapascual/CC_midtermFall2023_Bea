@@ -13,7 +13,9 @@ let circleX;
 let circleY;
 let circleSize; // for ripples
 
-let angle = 0
+let angle = 0 // for breathing circle
+
+
 
 function setup() {
   createCanvas(800, 800);
@@ -23,7 +25,7 @@ function setup() {
   c2 = color(204, 51, 0);
   c3 = color(32, 31, 70, 100);
   c4 = color(54, 40, 78);
-  c5 = color(55, 55, 149);
+  c5 = color(55, 55, 149); // colors for city scene
 
   circleX = width / 2;
   circleY = height / 2;
@@ -33,10 +35,10 @@ function setup() {
     tall[i] = random(425, 500);
     tall2[i] = random(325, 400);
     tall3[i] = random(200, 300);
-  }
+  } // arrays for random heights of buildings
   for (i = 0; i < 9; i++) {
     city3[i] = new building(
-      i * 100 - 100,
+      i * 100 - 100, // buildings get cut off without this - 100 (idk why)
       height - tall3[i],
       100,
       tall3[i],
@@ -44,7 +46,7 @@ function setup() {
     );
     city2[i] = new building(i * 100 - 50, height - tall2[i], 100, tall2[i], c4);
     city[i] = new building(i * 100 - 30, height - tall[i], 100, tall[i], c3);
-  }
+  } // creates multiple buildings and staggers building positions
 }
 
 function setGradient(c1, c2) {
@@ -55,7 +57,7 @@ function setGradient(c1, c2) {
     var c = lerpColor(c1, c2, inter);
     stroke(c);
     line(0, y, width, y);
-  }
+  } // https://codeburst.io/sunsets-and-shooting-stars-in-p5-js-92244d238e2b
 } // gradient background of sunset
 
 function draw() {
@@ -78,6 +80,7 @@ function draw() {
     circle(circleX, circleY, circleSize * 0.75);
     circle(circleX, circleY, circleSize * 0.5);
   } // ripples
+  // https://happycoding.io/tutorials/p5js/input/mouse-ripple (probably changing)
 
   if (option === 2) {
     frameRate(1);
@@ -89,7 +92,7 @@ function draw() {
       noStroke();
       fill(255, 255, 0);
       ellipse(x, y, 3, 3);
-    }
+    }// stars https://codeburst.io/sunsets-and-shooting-stars-in-p5-js-92244d238e2b
     for (i = 0; i < 9; i++) {
       stroke(1);
       city[i].display();
@@ -106,12 +109,6 @@ function draw() {
     translate(width / 2, height / 2);
     noStroke();
     background(178, 190, 136, 150);
-  
-    const r = map(sin(angle), -1, 1, 0, 100);
-    const baseRadius = 300
-    
-    
-
 
 const from = color(210,245,158);
 const to = color(255);
@@ -125,17 +122,18 @@ ellipse(0,0,300);
 fill(interB);
 ellipse(0,0,200);
 fill(to);
-ellipse(0,0,100);
+ellipse(0,0,100); //  (references)
   
-    // fill(210,245,158,);
-    // circle(0, 0, 100+baseRadius);
+
+const r = map(sin(angle), -1, 1, 0, 100);
+    const baseRadius = 400
   
     fill(26, 113, 63, 150);
-    circle(0, 0, map(r, 0, 100, 0, r+baseRadius));
+    circle(0, 0, map(r, 0, 100, 0, baseRadius));
   
-    angle += 0.01;
-}
-}
+    angle += 0.012;
+} // breathing circle https://editor.p5js.org/dansakamoto/sketches/H1ICcXXtm
+} 
 
 function keyPressed() {
   option++;
