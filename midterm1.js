@@ -16,6 +16,8 @@ let circleSize; // for ripples
 
 let angle = 0; // for breathing circle
 
+let heartX, heartY;
+
 function setup() {
   createCanvas(800, 800);
   background(255);
@@ -50,6 +52,7 @@ function setup() {
     city2[i] = new building(i * 100 - 50, height - tall2[i], 100, tall2[i], c4);
     city[i] = new building(i * 100 - 30, height - tall[i], 100, tall[i], c3);
   } // creates multiple buildings and staggers building positions
+  
 }
 
 function setGradient(c1, c2) {
@@ -135,32 +138,49 @@ pop()
 
   if (option === 4) {
     frameRate(60);
-    background(178, 190, 136, 150);
-    translate(width / 2, height / 2);
-    noStroke();
-    background(178, 190, 136, 150);
+     push();
+  translate(width / 2, height / 2);
+  noStroke();
+  background(178, 190, 136, 150);
 
-    const from = color(210, 245, 158);
-    const to = color(255);
-    colorMode(RGB);
-    const interA = lerpColor(from, to, 0.33);
-    const interB = lerpColor(from, to, 0.66);
-    fill(from);
-    ellipse(0, 0, 400);
-    fill(interA);
-    ellipse(0, 0, 300);
-    fill(interB);
-    ellipse(0, 0, 200);
-    fill(to);
-    ellipse(0, 0, 100); //  (references)
+  const r = map(sin(angle), -1, 1, 0, 100);
+  const baseRadius = 700;
 
-    const r = map(sin(angle), -1, 1, 0, 100);
-    const baseRadius = 400;
+  const from = color(210, 245, 158);
+  const to = color(255);
+  colorMode(RGB);
+  const interA = lerpColor(from, to, 0.33);
+  const interB = lerpColor(from, to, 0.66);
+  fill(from);
+  ellipse(0, 0, 700);
+  fill(interA);
+  ellipse(0, 0, 550);
+  fill(interB);
+  ellipse(0, 0, 400);
+  fill(to);
+  ellipse(0, 0, 250);
 
-    fill(26, 113, 63, 150);
-    circle(0, 0, map(r, 0, 100, 0, baseRadius));
+  // fill(210,245,158,);
+  // circle(0, 0, 100+baseRadius);
 
-    angle += 0.012;
+  fill(26, 113, 63, 150);
+  circle(0, 0, map(r, 0, 100, 0, baseRadius));
+
+  angle += 0.015;
+  pop();
+    
+    push();
+    heartX = 100
+   translate(width / 2, height / 2 - heartY + 50);
+  fill(255, 192, 203);
+  noStroke();
+  heartX += 0.3;
+  heartY = 3*(cos(heartX/2) + sin(heartX/4))+ 110;
+  rotate(PI / 4.0);
+  square(0, 0, heartY);
+  circle(heartY / 2, 0, heartY);
+  circle(0, heartY / 2, heartY);
+  pop()
   } // breathing circle https://editor.p5js.org/dansakamoto/sketches/H1ICcXXtm (kinda)
 }
 
