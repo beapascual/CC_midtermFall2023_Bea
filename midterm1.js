@@ -7,7 +7,8 @@ let city = [];
 let city2 = [];
 let city3 = []; // for city
 
-let c1, c2, c3, c4, c5; // colors
+let c1, c2, c3, c4, c5; // colors for city
+let g1, g2, g3; // colors for sunset
 
 let circleX;
 let circleY;
@@ -24,6 +25,10 @@ function setup() {
   c3 = color(32, 31, 70, 100);
   c4 = color(54, 40, 78);
   c5 = color(55, 55, 149); // colors for city scene
+  
+  g1 = color(232, 160, 86);
+  g2 = color(232,86,94);
+  g3 = color(13, 29, 134); // colors for sunset scene
 
   circleX = width / 2;
   circleY = height / 2;
@@ -78,8 +83,37 @@ function draw() {
     circle(circleX, circleY, circleSize * 0.5);
   } // ripples
   // https://happycoding.io/tutorials/p5js/input/mouse-ripple (probably changing)
+  
+  if (option === 2){
+    if(mouseY <= 400){
+     g = lerpColor(g1, g2, map(mouseY,0,400,0,1));
+     background(g);
+    } else if (mouseY >= 400) {
+     p = lerpColor(g2, g3, map(mouseY,400,800,0,1));
+      background(p);
+    }
+  push();
+  translate(width/2, mouseY);
+  fill(255,255,0);
+  ellipse(0,0,350,350);
+pop()
+  
+  beginShape();
+  fill(0);
+  noStroke();
+  vertex(0,550);
+  vertex(150,400);
+  vertex(225,450);
+  vertex(400,250);
+  vertex(575,425);
+  vertex(650,350);
+  vertex(800,500);
+  vertex(800,800);
+  vertex(0,800);
+  endShape();
+  }
 
-  if (option === 2) {
+  if (option === 3) {
     frameRate(1);
     strokeWeight(1);
     setGradient(c1, c2);
@@ -99,7 +133,7 @@ function draw() {
   }
   //night city
 
-  if (option === 3) {
+  if (option === 4) {
     frameRate(60);
     background(178, 190, 136, 150);
     translate(width / 2, height / 2);
@@ -132,7 +166,7 @@ function draw() {
 
 function keyPressed() {
   option++;
-  if (option > 3) {
+  if (option > 4) {
     option = 1;
   }
 } // to change scenes
