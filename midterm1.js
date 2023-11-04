@@ -8,7 +8,7 @@ let city2 = [];
 let city3 = []; // for city
 
 let c1, c2, c3, c4, c5; // colors for city
-let g1, g2, g3; // colors for sunset
+let g1, g2, g3, g4, g5; // colors for sunset
 
 let circleX;
 let circleY;
@@ -27,10 +27,12 @@ function setup() {
   c3 = color(32, 31, 70, 100);
   c4 = color(54, 40, 78);
   c5 = color(55, 55, 149); // colors for city scene
-  
-  g1 = color(232, 160, 86);
-  g2 = color(232,86,94);
-  g3 = color(13, 29, 134); // colors for sunset scene
+
+  g1 = color(225, 81, 107);
+  g2 = color(233, 136, 63);
+  g3 = color(140, 53, 105);
+  g4 = color(232, 86, 94);
+  g5 = color(13, 29, 134); // colors for sunset scene
 
   circleX = width / 2;
   circleY = height / 2;
@@ -52,7 +54,8 @@ function setup() {
     city2[i] = new building(i * 100 - 50, height - tall2[i], 100, tall2[i], c4);
     city[i] = new building(i * 100 - 30, height - tall[i], 100, tall[i], c3);
   } // creates multiple buildings and staggers building positions
-  
+
+  heartX = 100;
 }
 
 function setGradient(c1, c2) {
@@ -64,7 +67,28 @@ function setGradient(c1, c2) {
     stroke(c);
     line(0, y, width, y);
   } // https://codeburst.io/sunsets-and-shooting-stars-in-p5-js-92244d238e2b
-} // gradient background of sunset
+} // gradient background for city
+
+function setGradient(g1, g2) {
+  // noprotect
+  noFill();
+  for (var y = 0; y < height; y++) {
+    var inter = map(y, 0, 300, 0, 1);
+    var s1 = lerpColor(g1, g2, inter);
+    stroke(s1);
+    line(0, y, width, y);
+  }
+}
+function setGradient(g3, g4) {
+  // noprotect
+  noFill();
+  for (var y = 0; y < height; y++) {
+    var inter = map(y, 0, 400, 0, 1);
+    var s2 = lerpColor(g3, g4, inter);
+    stroke(s2);
+    line(0, y, width, y);
+  }
+}
 
 function draw() {
   if (option === 1) {
@@ -86,34 +110,40 @@ function draw() {
     circle(circleX, circleY, circleSize * 0.5);
   } // ripples
   // https://happycoding.io/tutorials/p5js/input/mouse-ripple (probably changing)
-  
-  if (option === 2){
-    if(mouseY <= 400){
-     g = lerpColor(g1, g2, map(mouseY,0,400,0,1));
-     background(g);
-    } else if (mouseY >= 400) {
-     p = lerpColor(g2, g3, map(mouseY,400,800,0,1));
-      background(p);
+
+  if (option === 2) {
+    if (mouseY <= 300) {
+      setGradient(g1, g2);
+    } else if (mouseY <= 500) {
+      p1 = lerpColor(g2, g4, map(mouseY, 150, 500, 0, 1));
+      background(p1);
+    } else if (mouseY <= 600) {
+      setGradient(g3, g4);
+    } else if (mouseY >= 600) {
+      p2 = lerpColor(g4, g5, map(mouseY, 550, 800, 0, 1));
+      background(p2);
     }
-  push();
-  translate(width/2, mouseY);
-  fill(255,255,0);
-  ellipse(0,0,350,350);
-pop()
-  
-  beginShape();
-  fill(0);
-  noStroke();
-  vertex(0,550);
-  vertex(150,400);
-  vertex(225,450);
-  vertex(400,250);
-  vertex(575,425);
-  vertex(650,350);
-  vertex(800,500);
-  vertex(800,800);
-  vertex(0,800);
-  endShape();
+
+    push();
+    translate(width / 2, mouseY);
+    noStroke();
+    fill(255, 255, 0);
+    ellipse(0, 0, 350, 350);
+    pop();
+
+    beginShape();
+    fill(0);
+    noStroke();
+    vertex(0, 550);
+    vertex(150, 400);
+    vertex(225, 450);
+    vertex(400, 250);
+    vertex(575, 425);
+    vertex(650, 350);
+    vertex(800, 500);
+    vertex(800, 800);
+    vertex(0, 800);
+    endShape();
   }
 
   if (option === 3) {
@@ -138,49 +168,49 @@ pop()
 
   if (option === 4) {
     frameRate(60);
-     push();
-  translate(width / 2, height / 2);
-  noStroke();
-  background(178, 190, 136, 150);
-
-  const r = map(sin(angle), -1, 1, 0, 100);
-  const baseRadius = 700;
-
-  const from = color(210, 245, 158);
-  const to = color(255);
-  colorMode(RGB);
-  const interA = lerpColor(from, to, 0.33);
-  const interB = lerpColor(from, to, 0.66);
-  fill(from);
-  ellipse(0, 0, 700);
-  fill(interA);
-  ellipse(0, 0, 550);
-  fill(interB);
-  ellipse(0, 0, 400);
-  fill(to);
-  ellipse(0, 0, 250);
-
-  // fill(210,245,158,);
-  // circle(0, 0, 100+baseRadius);
-
-  fill(26, 113, 63, 150);
-  circle(0, 0, map(r, 0, 100, 0, baseRadius));
-
-  angle += 0.015;
-  pop();
-    
     push();
-    heartX = 100
-   translate(width / 2, height / 2 - heartY + 50);
-  fill(255, 192, 203);
-  noStroke();
-  heartX += 0.3;
-  heartY = 3*(cos(heartX/2) + sin(heartX/4))+ 110;
-  rotate(PI / 4.0);
-  square(0, 0, heartY);
-  circle(heartY / 2, 0, heartY);
-  circle(0, heartY / 2, heartY);
-  pop()
+    translate(width / 2, height / 2);
+    noStroke();
+    background(178, 190, 136, 150);
+
+    const r = map(sin(angle), -1, 1, 0, 100);
+    const baseRadius = 700;
+
+    const from = color(210, 245, 158);
+    const to = color(255);
+    colorMode(RGB);
+    const interA = lerpColor(from, to, 0.33);
+    const interB = lerpColor(from, to, 0.66);
+    fill(from);
+    ellipse(0, 0, 700);
+    fill(interA);
+    ellipse(0, 0, 550);
+    fill(interB);
+    ellipse(0, 0, 400);
+    fill(to);
+    ellipse(0, 0, 250);
+
+    // fill(210,245,158,);
+    // circle(0, 0, 100+baseRadius);
+
+    fill(26, 113, 63, 150);
+    circle(0, 0, map(r, 0, 100, 0, baseRadius));
+
+    angle += 0.015;
+    pop();
+
+    push();
+
+    translate(width / 2, height / 2 - heartY + 50);
+    fill(255, 192, 203);
+    noStroke();
+    heartX += 0.3;
+    heartY = 3 * (cos(heartX / 2) + sin(heartX / 4)) + 110;
+    rotate(PI / 4.0);
+    square(0, 0, heartY);
+    circle(heartY / 2, 0, heartY);
+    circle(0, heartY / 2, heartY);
+    pop();
   } // breathing circle https://editor.p5js.org/dansakamoto/sketches/H1ICcXXtm (kinda)
 }
 
