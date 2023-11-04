@@ -23,7 +23,7 @@ function setup() {
   background(255);
 
   c1 = color(0, 0, 153);
-  c2 = color(204, 51, 0);
+  c2 = color(204, 63, 77);
   c3 = color(32, 31, 70, 100);
   c4 = color(54, 40, 78);
   c5 = color(55, 55, 149); // colors for city scene
@@ -205,7 +205,7 @@ function draw() {
     fill(255, 192, 203);
     noStroke();
     heartX += 0.3;
-    heartY = 3 * (cos(heartX / 2) + sin(heartX / 4)) + 110;
+    heartY = 3 * (cos(heartX/2) + sin(heartX/4)) + 110;
     rotate(PI / 4.0);
     square(0, 0, heartY);
     circle(heartY / 2, 0, heartY);
