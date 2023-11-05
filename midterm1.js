@@ -10,6 +10,7 @@ let city3 = []; // for city
 let c1, c2, c3, c4, c5; // colors for city
 let g1, g2, g3, g4, g5; // colors for sunset
 
+
 let circleX;
 let circleY;
 let outerDiam; // for ripples
@@ -33,6 +34,7 @@ function setup() {
   g3 = color(140, 53, 105);
   g4 = color(232, 86, 94);
   g5 = color(13, 29, 134); // colors for sunset scene
+  
 
   circleX = width / 2;
   circleY = height / 2;
@@ -92,7 +94,7 @@ function setGradient(g3, g4) {
 
 function draw() {
   if (option === 1) {
-    background(0);
+    background(199,242,246);
     if (mouseIsPressed === true) {
       circleX = mouseX;
       circleY = mouseY;
@@ -104,9 +106,9 @@ function draw() {
     for (var i = 0; i < 5; i++) {
       var diam = outerDiam - 30 * i;
       if (diam > 0) {
-        var fade = map(diam, 0, width, 255, 0);
-        strokeWeight(2);
-        stroke(fade);
+        var fade = map(diam, 0, 600,4 , 0);
+        strokeWeight(fade);
+        stroke(155,231,231);
         noFill();
         ellipse(circleX, circleY, diam);
       }
