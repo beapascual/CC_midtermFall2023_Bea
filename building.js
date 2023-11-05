@@ -1,6 +1,3 @@
-let i;
-let j;
-
 class building{
   constructor(x, y, w, h, c){
     this.x = x;
@@ -15,6 +12,4 @@ class building{
     rect(this.x,this.y,this.w,this.h);
   }
 }
-
-
 
