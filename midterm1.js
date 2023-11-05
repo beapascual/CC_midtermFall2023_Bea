@@ -12,7 +12,7 @@ let g1, g2, g3, g4, g5; // colors for sunset
 
 let circleX;
 let circleY;
-let circleSize; // for ripples
+let outerDiam; // for ripples
 
 let angle = 0; // for breathing circle
 
@@ -36,7 +36,7 @@ function setup() {
 
   circleX = width / 2;
   circleY = height / 2;
-  circleSize = 0; // for ripples
+  outerDiam = 0; // for ripples
 
   for (i = 0; i < 9; i++) {
     tall[i] = random(425, 500);
@@ -93,23 +93,26 @@ function setGradient(g3, g4) {
 function draw() {
   if (option === 1) {
     background(0);
-
     if (mouseIsPressed === true) {
       circleX = mouseX;
       circleY = mouseY;
-      circleSize = 0;
+      outerDiam = 0;
     }
-    noFill();
-    strokeWeight(5);
-    stroke(255);
 
-    circleSize += 5;
+    outerDiam += 2;
 
-    circle(circleX, circleY, circleSize);
-    circle(circleX, circleY, circleSize * 0.75);
-    circle(circleX, circleY, circleSize * 0.5);
+    for (var i = 0; i < 5; i++) {
+      var diam = outerDiam - 30 * i;
+      if (diam > 0) {
+        var fade = map(diam, 0, width, 255, 0);
+        strokeWeight(2);
+        stroke(fade);
+        noFill();
+        ellipse(circleX, circleY, diam);
+      }
+    }
   } // ripples
-  // https://happycoding.io/tutorials/p5js/input/mouse-ripple (probably changing)
+  // https://editor.p5js.org/chjno/sketches/BkbTpyojZ
 
   if (option === 2) {
     if (mouseY <= 300) {
@@ -205,7 +208,7 @@ function draw() {
     fill(255, 192, 203);
     noStroke();
     heartX += 0.3;
-    heartY = 3 * (cos(heartX/2) + sin(heartX/4)) + 110;
+    heartY = 3 * (cos(heartX / 2) + sin(heartX / 4)) + 110;
     rotate(PI / 4.0);
     square(0, 0, heartY);
     circle(heartY / 2, 0, heartY);
