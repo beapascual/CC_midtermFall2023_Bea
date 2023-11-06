@@ -41,7 +41,7 @@ function setup() {
     tall[i] = random(425, 500); // row 3
     tall2[i] = random(325, 400); // row 2
     tall3[i] = random(200, 300); // row 1
-  } // arrays for random heights of buildings
+  } // arrays for random heights of buildings -- makes each building a random height (range depends on the row)
 
   for (i = 0; i < 9; i++) {
     city3[i] = new building(
@@ -59,34 +59,34 @@ function setup() {
 
 }
 
-
+ //https://codeburst.io/sunsets-and-shooting-stars-in-p5-js-92244d238e2b (used for all gradients)
 function setGradient(g1, g2) {
   noFill();
   for (var y = 0; y < height; y++) {
-    var inter = map(y, 0, 300, 0, 1);
-    var s1 = lerpColor(g1, g2, inter);
-    stroke(s1);
-    line(0, y, width, y);
-  }// https://codeburst.io/sunsets-and-shooting-stars-in-p5-js-92244d238e2b
+    var inter = map(y, 0, 300, 0, 1); // from y=0 to y=300, color will change completely from g1 to g2
+    var s1 = lerpColor(g1, g2, inter); // lerp color makes color change from 1 to 2, inter makes smooth gradient
+    stroke(s1); // each line is a different color to make gradient ^^
+    line(0, y, width, y); // makes the color appear
+  }
 } // first gradient for sunset
-function setGradient(g3, g4) {
+function setGradient(g3, g4) { // works the same way as last gradient
   noFill();
   for (var y = 0; y < height; y++) {
-    var inter = map(y, 0, 400, 0, 1);
+    var inter = map(y, 0, 400, 0, 1);// from y=0 to y=400, color will change completely from g1 to g2
     var s2 = lerpColor(g3, g4, inter);
     stroke(s2);
     line(0, y, width, y);
-  }// https://codeburst.io/sunsets-and-shooting-stars-in-p5-js-92244d238e2b
+  }
 } // second gradient for sunset
 
-function setGradient(c1, c2) {
+function setGradient(c1, c2) { // works the same way as last gradient
   noFill();
   for (var y = 0; y < height; y++) {
-    var inter = map(y, 0, height, 0, 1);
+    var inter = map(y, 0, height, 0, 1);// from y=0 to y=800, color will change completely from g1 to g2
     var c = lerpColor(c1, c2, inter);
     stroke(c);
     line(0, y, width, y);
-  } // https://codeburst.io/sunsets-and-shooting-stars-in-p5-js-92244d238e2b
+  }
 } // gradient background for city
 
 
@@ -94,10 +94,10 @@ function setGradient(c1, c2) {
 function draw() {
   if (option === 1) {
     background(199,242,246);
-    if (mouseIsPressed === true) {
+    if (mouseIsPressed === true) { // makes ripple appear if mouse is pressed
       circleX = mouseX;
       circleY = mouseY;
-      outerDiam = 0;
+      outerDiam = 0; // restarts the ripple when mouse is pressed
     }
 
     outerDiam += 2;
@@ -105,7 +105,7 @@ function draw() {
     for (var i = 0; i < 5; i++) {
       var diam = outerDiam - 30 * i;
       if (diam > 0) {
-        var fade = map(diam, 0, 600,4 , 0);
+        var fade = map(diam, 0, 600,4 , 0); // makes stroke weight decrease as circles get bigger (for diam < 600)
         strokeWeight(fade);
         stroke(155,231,231);
         noFill();
